@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Library Reservation</title>
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="col-md-4">
+		 	<h1>Add Reservation</h1>
+		</div>
+		
+		<div>
+			<form th:object = "${student}" th:action = "@{save}" action = "#" method = "post">
+				<label for = "fullName">Full Name</label>
+				<input type = "text" id = "fullName" th:field = "*{fullName}"/>
+				 
+				<label for = "gender">Gender</label>
+				<input type = "text" id = "gender" th:field = "*{gender}"/>
+				 
+				<label for = "studentNumber">Student Number</label>
+				<input type = "text" id = "studentNumber" th:field = "*{studentNumber}"/>
+				
+				<label for = "bookingTime">Booking Time</label>
+				<input type = "text" id = "bookingTime" th:field = "*{bookingTime}"/>
+				
+				<label for = "roomlist">Room Type</label>
+				<select id = "roomlist" th:field = "*{room}" class = "from-control" >
+					<option th:each = "room: ${rooms}"
+							th:value = "${room.roomid}"
+							th:text = "${room.name}"></option>
+				</select>
+				<input type = "submit" value = "Save"></input>
+			</form>
+		</div>
+</div>
+</body>
+</html>
