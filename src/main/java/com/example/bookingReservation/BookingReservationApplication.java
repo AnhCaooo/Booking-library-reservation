@@ -11,6 +11,8 @@ import com.example.bookingReservation.domain.Room;
 import com.example.bookingReservation.domain.RoomRepository;
 import com.example.bookingReservation.domain.Student;
 import com.example.bookingReservation.domain.StudentRepository;
+import com.example.bookingReservation.domain.UserRepository;
+import com.example.bookingReservation.domain.User;
 
 @SpringBootApplication
 public class BookingReservationApplication {
@@ -22,7 +24,7 @@ public class BookingReservationApplication {
 	}
 
 	@Bean 
-	public CommandLineRunner studentDemo(StudentRepository studentRepository, RoomRepository roomRepository) {
+	public CommandLineRunner studentDemo(StudentRepository studentRepository, RoomRepository roomRepository, UserRepository userRepository) {
 		return args -> {
 			// Save demo data to database
 			Log.info("Saving some students who booked the reservation");
@@ -41,7 +43,8 @@ public class BookingReservationApplication {
 			studentRepository.save(new Student("Alesk Mike", "Male", 190232, "18:00-19:00",
 					roomRepository.findRoomByName("2-5 persons room").get(0)));
 			
-			
+			userRepository.save(new User("user", "$2a$10$/PN5TqnuJDSzBpWotNn9B.HwIU3HRZx5z/rswgTIJpoX9QQ28OYoe" ,"USER"));
+			userRepository.save(new User("admin", "$2a$10$Oa2QKYGoIj.rE.l7GAHzQe3zWxKYT4S8qGfj3Mq6pjnGRf1qbC926" ,"ADMIN"));
 		};
 	}
 }

@@ -1,6 +1,7 @@
 package com.example.bookingReservation.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,12 @@ public class WebController {
 	
 	@Autowired
 	private RoomRepository roomRepository; 
+	
+	//Login method
+		@RequestMapping(value = "/login")
+		public String login() {
+			return "login";
+		}
 	
 	// Show all reservation
 	@RequestMapping(value = {"/", "/reservationlist"})
@@ -44,6 +51,7 @@ public class WebController {
 	}
 	
 	// Delete reservation 
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public String deleteReservation(@PathVariable("id") Long studentId, Model model) {
 		studentRepository.deleteById(studentId);
