@@ -7,32 +7,54 @@
 <body>
 	<div class="container">
 		<div class="col-md-4">
-		 	<h1>Add Reservation</h1>
+		 	<h1>Book Your Reservation</h1>
 		</div>
 		
 		<div>
 			<form th:object = "${student}" th:action = "@{save}" action = "#" method = "post">
-				<label for = "fullName">Full Name</label>
-				<input type = "text" id = "fullName" th:field = "*{fullName}"/>
-				 
-				<label for = "gender">Gender</label>
-				<input type = "text" id = "gender" th:field = "*{gender}"/>
-				 
-				<label for = "studentNumber">Student Number</label>
-				<input type = "text" id = "studentNumber" th:field = "*{studentNumber}"/>
-				
-				<label for = "bookingTime">Booking Time</label>
-				<input type = "text" id = "bookingTime" th:field = "*{bookingTime}"/>
-				
-				<label for = "roomlist">Room Type</label>
-				<select id = "roomlist" th:field = "*{room}" class = "from-control" >
-					<option th:each = "room: ${rooms}"
-							th:value = "${room.roomid}"
-							th:text = "${room.name}"></option>
-				</select>
-				<input type = "submit" value = "Save"></input>
+   				<div class="elem-group">
+     				<label for="fullName">Enter Your Full Name</label>
+      				<input type="text" id="fullName" th:field = "*{fullName}" placeholder="John Doe" pattern=[A-Z\sa-z]{3,20} required>
+   				</div>
+    			
+    			<div class="elem-group">
+			    	<label for="genderlist">Select Gender</label>
+			      	<input type="text" id="gender" th:field = "*{gender}" placeholder="Male or Female or LGBT" pattern=(Male|Female|LGBT) required>
+			    </div>
+			    
+			    <div class="elem-group">
+			      	<label for="studentNumber">Your Student Number</label>
+			      	<input type="text" id="studentNumber" th:field = "*{studentNumber}" placeholder="1801989" pattern=[0-9]{7} required>
+			    </div>
+   			<hr>
+			    <div class="elem-group inlined">
+			      	<label for="startTime">Check-in Time</label>
+			      	<input type="time" id="startTime" th:field = "*{startTime}" required>
+			    </div>
+			    
+			    <div class="elem-group inlined">
+			     	<label for="endTime">Check-out Time</label>
+			      	<input type="time" id="endTime" th:field = "*{endTime}" required>
+			    </div>
+			    
+			    <div class="elem-group inlined">
+			        <label for="date">Reservation Date</label>
+			        <input type="date" id="date" th:field = "*{date}" required>
+			    </div>
+			    
+			    <div class="elem-group">
+			    	 <label for="roomlist">Select Room Preference</label>
+			      		<select id="roomlist" th:field = "*{room}" required>
+			          	<option value="">Choose a Room from the List</option>
+			          	<option th:each = "room: ${rooms}"
+								th:value = "${room.roomid}"
+								th:text = "${room.name}"></option>
+				      </select>
+			    </div>
+			<hr>
+			    <input type = "submit" value = "Book Reservation"></input>
 			</form>
-		</div>
+	</div>
 </div>
 </body>
 </html>

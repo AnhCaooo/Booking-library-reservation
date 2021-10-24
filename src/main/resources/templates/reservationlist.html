@@ -24,18 +24,22 @@
 		 <table class="table table-striped table-dark">
 		 	<tr>
 		 		<th>Full Name</th>
-		 		<th>Gender</th>
-		 		<th>Student Number</th>
-		 		<th>Booking Time</th>
+		 		<th sec:authorize="hasAuthority('ADMIN')">Gender</th>
+		 		<th sec:authorize="hasAuthority('ADMIN')">Student Number</th>
+		 		<th>Start Time</th>
+		 		<th>End Time</th>
+		 		<th>Date</th>
 		 		<th>Room Type</th>
 		 	</tr>
 		 	
 		 	<tr th:each = "student : ${students}">
 		 		<td th:text = "${student.fullName}"></td>
-		 		<td th:text = "${student.gender}"></td>
-		 		<td th:text = "${student.studentNumber}"></td>
-				<td th:text = "${student.bookingTime}">></td>
-				<td th:text = "${student.room.name}">></td>
+		 		<td sec:authorize="hasAuthority('ADMIN')" th:text = "${student.gender}"></td>
+		 		<td sec:authorize="hasAuthority('ADMIN')" th:text = "${student.studentNumber}"></td>
+				<td th:text = "${student.startTime}"></td>
+				<td th:text = "${student.endTime}"></td>
+				<td th:text = "${#dates.format(student.date, 'dd-MM-yyyy')}">></td>
+				<td th:text = "${student.room.name}"></td>
 				<td><a th:href="@{/edit/{id}(id=${student.id})}" class = "btn btn-primary">Edit</a></td>
 				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${student.id})}" class = "btn btn-danger">Delete</a></td>
 	 		</tr>		 

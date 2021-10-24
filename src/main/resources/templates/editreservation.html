@@ -14,25 +14,45 @@
 		
 			<input type="hidden" th:field="*{id}" class="form-control"/>
 			
-			<label for = "fullName">Full Name</label>
-			<input type = "text" id = "fullName" th:field = "*{fullName}" />
+			<div class="elem-group">
+			      <label for = "fullName">Full Name</label>
+			      <input type="text" id="fullName" th:field = "*{fullName}" pattern=[A-Z\sa-z]{3,20} required>
+			</div>
 			
-			<label for = "gender">Gender</label>
-			<input type = "text" id = "gender" th:field = "*{gender}" />
+			<div class="elem-group">
+			    <label for="genderlist">Gender</label>
+			     <input type="text" id="gender" th:field = "*{gender}" placeholder="Male or Female or LGBT" pattern=(Male|Female|LGBT) required>
+			</div>
 			
-			<label for = "studentNumber">Student Number</label>
-			<input type = "text" id = "studentNumber" th:field = "*{studentNumber}" />
+			<div class="elem-group">
+			      <label for="studentNumber">Student Number</label>
+			      <input type="text" id="studentNumber" th:field = "*{studentNumber}" pattern=[0-9]{7} required>
+			</div>
 			
-			<label for = "bookingTime">Booking Time</label>
-			<input type = "text" id = "bookingTime" th:field = "*{bookingTime}" />
+			<div class="elem-group">
+			      <label for="startTime">Check-in Time</label>
+    			  <input type="time" id="startTime" th:field = "*{startTime}" required>
+			</div>
 			
-			<label for = "roomlist">Room Type</label>
-			<select id = "roomlist" th:field = "*{room}" class = "from-control" >
-				<option th:each = "room: ${rooms}"
+			<div class="elem-group">
+			      <label for="endTime">Check-out Time</label>
+    			  <input type="time" id="endTime" th:field = "*{endTime}" required>
+			</div>
+			
+			<div class="elem-group">
+			     <label for="date">Reservation Date</label>
+       			 <input type="date" id="date" th:field = "*{date}" required>
+			</div>
+			
+			<div class="elem-group">
+			    <label for = "roomlist">Room Type</label>
+				<select id = "roomlist" th:field = "*{room}" class = "from-control" >
+					<option th:each = "room: ${rooms}"
 						th:value = "${room.roomid}"
 						th:text = "${room.name}">
-				</option>
-			</select>
+					</option>
+				</select>
+			</div>
 			
 			<input type = "submit" class = "btn btn-success" value = "Save"></input>
 		</form>

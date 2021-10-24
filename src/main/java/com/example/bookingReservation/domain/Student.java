@@ -1,11 +1,17 @@
 package com.example.bookingReservation.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Student {
@@ -15,20 +21,35 @@ public class Student {
 	private String fullName; 
 	private String gender; 
 	private Integer studentNumber; 
-	private String bookingTime; 
+	private String startTime;
+	private String endTime; 
+	private Date date; 
 	
+	@DateTimeFormat (pattern="yyyy-MM-dd") 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	@ManyToOne
+	@JsonIgnore
 	@JoinColumn(name = "roomid")
 	private Room room; 
 	
+	
 	public Student() {}
 	
-	public Student(String fullName, String gender, Integer studentNumber, String bookingTime, Room room) {
+	public Student(String fullName, String gender, Integer studentNumber, String startTime, String endTime, Date date, Room room) {
 		super();
 		this.fullName = fullName; 
 		this.gender = gender; 
 		this.studentNumber = studentNumber;
-		this.bookingTime = bookingTime; 
+		this.startTime = startTime; 
+		this.endTime = endTime; 
+		this.date = date; 
 		this.room = room; 
 	}
 
@@ -65,12 +86,21 @@ public class Student {
 		this.studentNumber = studentNumber;
 	}
 
-	public String getBookingTime() {
-		return bookingTime;
+
+	public String getStartTime() {
+		return startTime;
 	}
 
-	public void setBookingTime(String bookingTime) {
-		this.bookingTime = bookingTime;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 
 	public Room getRoom() {

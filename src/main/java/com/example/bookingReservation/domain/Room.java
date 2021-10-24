@@ -50,6 +50,4 @@ public class Room {
 		this.students = students;
 	}
 	
-	
-	
 }

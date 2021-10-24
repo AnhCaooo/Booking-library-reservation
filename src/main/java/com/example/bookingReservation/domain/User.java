@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Table(name="usertable")
 @Entity
 public class User {
 
@@ -21,6 +23,7 @@ public class User {
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
 	
+	
 	@Column(name = "role", nullable = false)
 	private String role;
 	
@@ -31,6 +34,7 @@ public class User {
 		this.username = username; 
 		this.passwordHash = passwordHash;
 		this.role = role;
+	 
 	}
 
 	// Setters and getters
@@ -65,5 +69,7 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+
 	
 }
