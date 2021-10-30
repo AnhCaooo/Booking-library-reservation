@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name="username")
+@Table(name = "username")
 @Entity
 public class User {
 
@@ -19,32 +19,37 @@ public class User {
 	// Username with unique constraint
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
-	
+
 	@Column(name = "password", nullable = false)
 	private String passwordHash;
-	
-	@Column(name = "email", nullable = false)
-    private String email;
-	
+
+	@Column(name = "email", nullable = false, unique = true, length = 45)
+	private String email;
+
 	@Column(name = "role", nullable = false)
 	private String role;
-	
-	public User() {}
-	
+
+	public User() {
+	}
+
 	/*
-	 * User entity class with parameters 
+	 * User entity class with parameters
+	 * 
 	 * @param username
+	 * 
 	 * @param passwordHash
+	 * 
 	 * @param role
+	 * 
 	 * @param email
-	 * */
+	 */
 	public User(String username, String passwordHash, String role, String email) {
-		super(); 
+		super();
 		this.username = username; 
-		this.passwordHash = passwordHash;
-		this.role = role;
+		this.passwordHash = passwordHash; 
 		this.email = email; 
-	 
+		this.role = role;
+
 	}
 
 	// Setters and getters
@@ -88,6 +93,4 @@ public class User {
 		this.email = email;
 	}
 
-
-	
 }
