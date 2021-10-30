@@ -1,10 +1,8 @@
 package com.example.bookingReservation.domain;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-@SuppressWarnings("deprecation")
 public class SignUpForm {
 	@NotEmpty
     @Size(min=5, max=30)
