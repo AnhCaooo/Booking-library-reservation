@@ -53,8 +53,8 @@ public class BookingReservationApplication {
 					format.parse("2021-10-24"),
 					roomRepository.findRoomByName("2-5 persons room").get(0)));
 			
-			userRepository.save(new User("user", "$2a$10$/PN5TqnuJDSzBpWotNn9B.HwIU3HRZx5z/rswgTIJpoX9QQ28OYoe" ,"USER"));
-			userRepository.save(new User("admin", "$2a$10$Oa2QKYGoIj.rE.l7GAHzQe3zWxKYT4S8qGfj3Mq6pjnGRf1qbC926" ,"ADMIN"));
+			userRepository.save(new User("user", "$2a$10$/PN5TqnuJDSzBpWotNn9B.HwIU3HRZx5z/rswgTIJpoX9QQ28OYoe" ,"USER", "user@gmail.com"));
+			userRepository.save(new User("admin", "$2a$10$Oa2QKYGoIj.rE.l7GAHzQe3zWxKYT4S8qGfj3Mq6pjnGRf1qbC926" ,"ADMIN", "admin@gmail.com"));
 		};
 	}
 }
