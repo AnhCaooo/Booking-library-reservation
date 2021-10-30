@@ -31,6 +31,13 @@ public class User {
 	
 	public User() {}
 	
+	/*
+	 * User entity class with parameters 
+	 * @param username
+	 * @param passwordHash
+	 * @param role
+	 * @param email
+	 * */
 	public User(String username, String passwordHash, String role, String email) {
 		super(); 
 		this.username = username; 

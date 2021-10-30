@@ -42,6 +42,16 @@ public class Student {
 	
 	public Student() {}
 	
+	/*
+	 * Student entity class with parameters 
+	 * @param fullName
+	 * @param gender
+	 * @param studentNumber
+	 * @param startTime
+	 * @param endTime
+	 * @param date
+	 * @param room
+	 * */
 	public Student(String fullName, String gender, Integer studentNumber, String startTime, String endTime, Date date, Room room) {
 		super();
 		this.fullName = fullName; 

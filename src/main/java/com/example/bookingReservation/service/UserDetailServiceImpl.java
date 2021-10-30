@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.example.bookingReservation.domain.User;
 import com.example.bookingReservation.domain.UserRepository;
 
+/*
+ * Spring Security is used to authenticate and authorize user
+ * */
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 	private final UserRepository repository;

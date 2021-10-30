@@ -7,7 +7,7 @@
 <body>
 	<div class="container">
 		<div class="col-md-4">
-		 	<h1>Book Your Reservation</h1>
+		 	<h1>Book Reservation</h1>
 		</div>
 		
 		<div>
@@ -23,7 +23,7 @@
 			    </div>
 			    
 			    <div class="elem-group">
-			      	<label for="studentNumber">Your Student Number</label>
+			      	<label for="studentNumber">Your Student Number (7 characters)</label>
 			      	<input type="text" id="studentNumber" th:field = "*{studentNumber}" placeholder="1801989" pattern=[0-9]{7} required>
 			    </div>
    			<hr>
@@ -54,6 +54,9 @@
 			<hr>
 			    <input type = "submit" value = "Book Reservation"></input>
 			</form>
+			
+			<hr>
+			<a href="/reservationlist" class="btn btn-warning">Cancel</a>
 	</div>
 </div>
 </body>
