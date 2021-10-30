@@ -27,7 +27,8 @@
       
       <div class="elem-group">
         <label>Password</label>
-        <input type="password" th:field="*{password}" class="form-control" placeholder="Password" />
+        <input type="password" th:field="*{password}" class="form-control" placeholder="Password" required 
+        minlength="4" maxlength="20"/>
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
       </div>
 

@@ -43,8 +43,7 @@ public class UserController {
 	                newUser.setEmail(signupForm.getEmail());
 	                if(userRepository.findByUsername(signupForm.getUsername()) == null){
 	                	userRepository.save(newUser);
-	                }
-	                else {
+	                }  else {
 	                    bindingResult.rejectValue("username", "err.username", "Username already exists!");
 	                    return "signup";
 	                }
