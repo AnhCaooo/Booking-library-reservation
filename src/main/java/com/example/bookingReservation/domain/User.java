@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Table(name = "username")
+@Table(name = "users")
 @Entity
 public class User {
 
@@ -28,6 +28,11 @@ public class User {
 
 	@Column(name = "role", nullable = false)
 	private String role;
+	
+	@Column(name = "verificationCode", length = 64)
+    private String verificationCode;
+     
+    private boolean enabled;
 
 	public User() {
 	}
@@ -77,6 +82,14 @@ public class User {
 		this.passwordHash = passwordHash;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getRole() {
 		return role;
 	}
@@ -85,12 +98,23 @@ public class User {
 		this.role = role;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getVerificationCode() {
+		return verificationCode;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
 	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+
 
 }

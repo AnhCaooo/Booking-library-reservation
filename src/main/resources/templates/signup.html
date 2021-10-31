@@ -27,14 +27,14 @@
       
       <div class="elem-group">
         <label>Password</label>
-        <input type="password" th:field="*{password}" class="form-control" placeholder="Password" required 
-        minlength="4" maxlength="20"/>
+        <input type="password" th:field="*{password}" class="form-control" placeholder="Password" required />
         <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>
       </div>
 
       <div class="elem-group">
         <label>Password</label>
         <input type="password" th:field="*{passwordCheck}" class="form-control " placeholder="Re-type Password" />
+         <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Error</p>
       </div>
 
       
