@@ -1,5 +1,8 @@
 package com.example.bookingReservation.web;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -7,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.bookingReservation.domain.RoomRepository;
 import com.example.bookingReservation.domain.Student;
@@ -27,7 +31,18 @@ public class WebController {
 		public String login() {
 			return "login";
 		}
-	
+	// Rest service that returns all students who book reservation 
+		@RequestMapping(value = "/students", method = RequestMethod.GET)
+		public @ResponseBody List<Student> studentListRest(){
+			return (List<Student>) studentRepository.findAll(); 
+		}
+		
+	// Rest service that returns student who book his/her reservation by id
+		@RequestMapping(value = "/students/{id}", method = RequestMethod.GET)
+		public @ResponseBody Optional<Student> findStudentRest(@PathVariable("id")Long studentId){
+			return studentRepository.findById(studentId);  
+		}
+		
 	// Show all reservation
 	@RequestMapping(value = {"/", "/reservationlist"})
 	public String reservationList(Model model) {
