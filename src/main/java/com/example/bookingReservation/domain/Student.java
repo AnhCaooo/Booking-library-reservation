@@ -66,7 +66,8 @@ public class Student {
 		this.startTime = startTime; 
 		this.endTime = endTime; 
 		this.date = date; 
-		this.room = room; 
+		this.room = room;  
+		
 	}
 
 	// setters and getters
