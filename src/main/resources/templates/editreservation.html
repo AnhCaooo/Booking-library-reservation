@@ -3,6 +3,49 @@
 <head>
 <title>Library Reservation</title>
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<style>
+body {
+  width: 500px;
+  margin: 0 auto;
+  padding: 50px;
+}
+
+div.elem-group {
+  margin: 20px 0;
+}
+
+div.elem-group.inlined {
+  width: 49%;
+  display: inline-block;
+  margin-left: 1%;
+}
+
+label {
+  display: block;
+  font-family: 'Nanum Gothic';
+  padding-bottom: 10px;
+  font-size: 1.25em;
+}
+
+input, select, textarea {
+  border-radius: 2px;
+  border: 2px solid #777;
+  box-sizing: border-box;
+  font-size: 1.25em;
+  font-family: 'Nanum Gothic';
+  width: 100%;
+  padding: 10px;
+}
+
+div.elem-group.inlined input {
+  width: 95%;
+  display: inline-block;
+}
+
+hr {
+  border: 1px dotted #ccc;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -21,7 +64,9 @@
 			
 			<div class="elem-group">
 			    <label for="genderlist">Gender</label>
-			     <input type="text" id="gender" th:field = "*{gender}" placeholder="Male or Female or LGBT" pattern=(Male|Female|LGBT) required>
+			      	<input type="radio" name="gender" value="Male"> Male
+					<input type="radio" name="gender" value="Female"> Female
+					<input type="radio" name="gender" value="Other"> Other
 			</div>
 			
 			<div class="elem-group">

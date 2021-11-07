@@ -41,7 +41,11 @@ public class Student {
 	@JoinColumn(name = "roomid")
 	private Room room; 
 	
-	
+	@ManyToOne
+	@JsonIgnore
+	@JoinColumn(name = "username")
+	private User user; 
+
 	public Student() {}
 	
 	/*

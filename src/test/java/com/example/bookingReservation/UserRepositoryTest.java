@@ -36,7 +36,7 @@ public class UserRepositoryTest {
 	    	user.setRole("testingRole");
 	    	user.setEmail("anhcao563@gmail.com");
 	    	userRepository.save(user);
-	    	assertThat(user.getId()).isNotNull();
+	    	assertThat(user.getUserid()).isNotNull();
 	    }
 	 
 }

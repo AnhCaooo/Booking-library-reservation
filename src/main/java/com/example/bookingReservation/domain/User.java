@@ -1,10 +1,14 @@
 package com.example.bookingReservation.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "users")
@@ -14,7 +18,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false, updatable = false)
-	private Long id;
+	private Long userid;
 
 	// Username with unique constraint
 	@Column(name = "username", nullable = false, unique = true)
@@ -33,6 +37,9 @@ public class User {
     private String verificationCode;
      
     private boolean enabled;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Student> students;
 
 	public User() {
 	}
@@ -58,12 +65,12 @@ public class User {
 	}
 
 	// Setters and getters
-	public Long getId() {
-		return id;
+	public Long getUserid() {
+		return userid;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserid(Long userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {
@@ -115,6 +122,13 @@ public class User {
 	}
 
 
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<Student> students) {
+		this.students = students;
+	}
 
 
 }
