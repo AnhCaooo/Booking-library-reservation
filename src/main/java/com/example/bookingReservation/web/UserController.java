@@ -51,9 +51,9 @@ public class UserController {
 	            }
 	            else {
 	                bindingResult.rejectValue("passwordCheck", "err.passCheck", "Password does not match!");
+	                return "signup";
 	            }
-	        }
-	        else {
+	        } else {
 	            return "signup";
 	        }
 	        return "redirect:/login";
