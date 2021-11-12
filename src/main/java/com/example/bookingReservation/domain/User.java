@@ -38,6 +38,9 @@ public class User {
      
     private boolean enabled;
 
+    @Column(name = "resetPasswordToken")
+    private String resetPasswordToken; 
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Student> students;
 
@@ -128,6 +131,14 @@ public class User {
 
 	public void setStudents(List<Student> students) {
 		this.students = students;
+	}
+
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
 	}
 
 

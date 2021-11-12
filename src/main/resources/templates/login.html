@@ -56,20 +56,24 @@ body {
 			 			<input type="submit" value="Sign In" class = "btn btn-primary"/>
 			 		</div>
 			 		
-			 		<hr> 
 					 <p>Become member? 
 					 	<span> 
-					 		<button class="signup-btn"><a th:href="@{/signup}" >Sign Up</a>
-					 		</button>
+					 		<button class="signup-btn"><a th:href="@{/signup}" >Sign Up</a></button>
 					 	</span>
 					 </p>
+					 
+					 <div class="text-center">
+					 	<a th:href = "@{/forgotPassword}">Forgot your password?</a>
+					 </div>
+					
+			 		
            		 </div>
  			</div>
  			
  		</div>
 	</form>
 	
-	
+
 	
 </body>
 </html>
