@@ -47,17 +47,18 @@ function myFunction1() {
       
       <div class="elem-group">
         <label>Password</label>
-        <input title = "Password must contain at least 8 characters, including UPPERCASE, lowercase, numbers and special charactes" type="password" th:field="*{password}" class="form-control" placeholder="Password" pattern=^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$ required />
+        <input title = "Password must contain at least 8 characters, including UPPERCASE, lowercase, numbers and special charactes" type="password" th:field="*{password}" class="form-control" placeholder="Testpass@123" pattern=^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$ required />
         <input type="checkbox" onclick="myFunction()">Show Password
-        <span class = "red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
       </div>
 
 		<br>
       <div class="elem-group">
         <label>Re-type your password again</label>
-        <input title="Please enter the same Password as above" type="password" th:field="*{passwordCheck}" class="form-control " placeholder="Re-type Password" pattern=^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$  required />
+        <input title="Please enter the same Password as above" type="password" th:field="*{passwordCheck}" class="form-control " placeholder="Re-type Testpass@123" pattern=^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$  required />
         <input type="checkbox" onclick="myFunction1()">Show Re-Password
-        <span class = "red" th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Error</span>
+        <br>
+        <span style="color:red" th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Error</span>
+        <br>
       </div>
 
       
