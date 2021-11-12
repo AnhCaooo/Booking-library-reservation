@@ -19,7 +19,8 @@ public class UserServices implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 
-	// Set value field for the resetPasswordToken of user found by email/ username and persist change to the database
+	// Set value field for the resetPasswordToken of user found by email/ username
+	// and persist change to the database
 	public void updateResetPasswordToken(String token, String email) throws UserNotFoundException {
 		User currentUser = userRepository.findByEmail(email);
 		if (currentUser != null) {

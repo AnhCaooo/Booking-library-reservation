@@ -1,27 +1,40 @@
 package com.example.bookingReservation.web;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.validation.Valid;
 
 import com.example.bookingReservation.domain.SignUpForm;
 import com.example.bookingReservation.domain.User;
 import com.example.bookingReservation.domain.UserRepository;
 
+import net.bytebuddy.utility.RandomString;
+
 @Controller
+@Component
 public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+    private JavaMailSender mailSender;
+	
 	@RequestMapping("signup")
 	public String addUser(Model model) {
 		model.addAttribute("signupform", new SignUpForm());
@@ -29,7 +42,10 @@ public class UserController {
 	}
 	
 	 @RequestMapping(value = "saveuser", method = RequestMethod.POST)
-	    public String save(@Valid @ModelAttribute("signupform") SignUpForm signupForm, BindingResult bindingResult) {
+	    public String save(@Valid @ModelAttribute("signupform") SignUpForm signupForm, BindingResult bindingResult, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+		 	
+		 	String randomCode = RandomString.make(64);
+		 	String siteURL = request.getRequestURL().toString().replace(request.getServletPath(), ""); 
 	    	System.out.println(bindingResult.toString());
 	    	if (!bindingResult.hasErrors()) { // validation errors
 	    		if (signupForm.getPassword().equals(signupForm.getPasswordCheck())) { // check password match		
@@ -42,8 +58,11 @@ public class UserController {
 	                newUser.setUsername(signupForm.getUsername());
 	                newUser.setRole("USER");
 	                newUser.setEmail(signupForm.getEmail());
+	                newUser.setVerificationCode(randomCode);
+	                newUser.setEnabled(false);
 	                if(userRepository.findByUsername(signupForm.getUsername()) == null){
 	                	userRepository.save(newUser);
+	                	sendVerificationEmail(newUser, siteURL);
 	                }  else {
 	                    bindingResult.rejectValue("username", "err.username", "Username already exists!");
 	                    return "signup";
@@ -58,4 +77,35 @@ public class UserController {
 	        }
 	        return "redirect:/login";
 	    }
+	 
+	 private void sendVerificationEmail(User user, String siteURL)
+		        throws MessagingException, UnsupportedEncodingException {
+		    String toAddress = user.getEmail();
+		    String fromAddress = "Library";
+		    String senderName = "Library Server";
+		    String subject = "Please verify your registration";
+		    String content = "Dear [[name]],<br>"
+		            + "Please click the link below to verify your registration:<br>"
+		            + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+		            + "Thank you,<br>"
+		            + "Library Server.";
+		     
+		    MimeMessage message = mailSender.createMimeMessage();
+		    MimeMessageHelper helper = new MimeMessageHelper(message);
+		     
+		    helper.setFrom(fromAddress, senderName);
+		    helper.setTo(toAddress);
+		    helper.setSubject(subject);
+		     
+		    content = content.replace("[[name]]", user.getUsername());
+		    String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+		     
+		    content = content.replace("[[URL]]", verifyURL);
+		     
+		    helper.setText(content, true);
+		     
+		    mailSender.send(message);
+		     
+		}
+	 
 }
