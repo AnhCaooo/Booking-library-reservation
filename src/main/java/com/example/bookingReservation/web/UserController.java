@@ -115,8 +115,6 @@ public class UserController {
 
 		mailSender.send(message);
 
-		// mailSender.send(message);
-
 	}
 
 	
