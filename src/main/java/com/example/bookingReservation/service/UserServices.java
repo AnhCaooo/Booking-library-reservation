@@ -18,6 +18,7 @@ public class UserServices implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
 
 	// Set value field for the resetPasswordToken of user found by email/ username
 	// and persist change to the database
@@ -50,5 +51,23 @@ public class UserServices implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	// If a user is found by the given verification code
+	// the application will activate the user account by updating the verification
+	// code to null and the enabled status to true
+	public boolean verify(String verificationCode) {
+		User user = userRepository.findByVerificationCode(verificationCode);
+
+		if (user == null || user.isEnabled()) {
+			return false;
+		} else {
+			user.setVerificationCode(null);
+			user.setEnabled(true);
+			userRepository.save(user);
+
+			return true;
+		}
+
 	}
 }

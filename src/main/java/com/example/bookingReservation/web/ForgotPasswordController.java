@@ -1,6 +1,7 @@
 package com.example.bookingReservation.web;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -26,11 +28,13 @@ import net.bytebuddy.utility.RandomString;
 @Component
 public class ForgotPasswordController {
 
-	@Autowired
-    private JavaMailSender mailSender;
+	//@Autowired
+    //private JavaMailSender mailSender;
      
     @Autowired
     private UserServices userServices;
+    
+
      
     @GetMapping("/forgotPassword")
     public String showForgotPasswordForm() {
@@ -58,8 +62,12 @@ public class ForgotPasswordController {
         return "forgotPasswordForm";
     }
      
+    
     public void sendEmail(String recipientEmail, String link)
             throws MessagingException, UnsupportedEncodingException {
+    	
+    	JavaMailSender mailSender = this.getJavaMailSender();
+    	
         MimeMessage message = mailSender.createMimeMessage();              
         MimeMessageHelper helper = new MimeMessageHelper(message);
          
@@ -117,6 +125,23 @@ public class ForgotPasswordController {
          
         return "message";
     }
+    
+    public JavaMailSender getJavaMailSender() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+
+		mailSender.setUsername("libraray2021@gmail.com");
+		mailSender.setPassword("server123456");
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return mailSender;
+	}
 }
 
  class Utility {
