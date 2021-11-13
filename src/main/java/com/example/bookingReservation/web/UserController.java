@@ -128,8 +128,6 @@ public class UserController {
 	
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("smtp.gmail.com");
-		mailSender.setPort(587);
 
 		String username = "libraray2021@gmail.com";
 		String password = "server123456";
@@ -137,6 +135,8 @@ public class UserController {
 		this.logger.debug("Password is" + password);
 		mailSender.setUsername(username);
 		mailSender.setPassword(password);
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
