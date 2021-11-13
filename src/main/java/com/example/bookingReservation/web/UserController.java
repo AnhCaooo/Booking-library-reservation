@@ -8,6 +8,8 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -43,6 +45,8 @@ public class UserController {
 //	@Autowired
 //    private JavaMailSender mailSender;
 
+	private final Logger logger = LoggerFactory.getLogger(UserController.class); 
+	
 	@RequestMapping("signup")
 	public String addUser(Model model) {
 		model.addAttribute("signupform", new SignUpForm());
@@ -113,8 +117,12 @@ public class UserController {
 
 		helper.setText(content, true);
 
-		mailSender.send(message);
-
+		try {
+			mailSender.send(message);
+		} catch (Exception e) {
+			this.logger.error("Error sending email", e);	
+		}
+		
 	}
 
 	
@@ -123,8 +131,12 @@ public class UserController {
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 
-		mailSender.setUsername("libraray2021@gmail.com");
-		mailSender.setPassword("server123456");
+		String username = "libraray2021@gmail.com";
+		String password = "server123456";
+		this.logger.debug("Username is " + username);
+		this.logger.debug("Password is" + password);
+		mailSender.setUsername(username);
+		mailSender.setPassword(password);
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
@@ -142,6 +154,5 @@ public class UserController {
 		} else {
 			return "verifyFail";
 		}
-
 	}
 }
